@@ -124,25 +124,36 @@ namespace ListPractice
 
             do
             {
-                if (ourMovies.Contains(movieCheck))
+                if (movieCheck.ToLower() == "quit" || movieCheck.ToLower() == "done")
+                {
+                    break;
+                }
+                else if (ourMovies.Contains(movieCheck))
                 {
                     Console.WriteLine("Thanks for placing your order {0} is on the way!", movieCheck);
                     moviesOrdered.Add(movieCheck);
                 }
 
-                if (ourMovies.Contains(movieCheck) == false)
+                else if (ourMovies.Contains(movieCheck) == false)
                 {
                     Console.WriteLine("We currently do not have {0} but it is on the way. Please wait 3-5 days to recieve it", movieCheck);
                     moviesOrdered.Add(movieCheck);
                     ourMovies.Add(movieCheck);
                 }
 
-                Console.WriteLine("What other movie would you like to add?");
+                Console.WriteLine("What other movie would you like to order?");
                 movieCheck = Console.ReadLine();
             }
             while (movieCheck.ToLower() != "quit" || movieCheck.ToLower() != "done");
-            Console.WriteLine("Your movies are on the way! Here is what you should expect.");
-            
+
+            if (moviesOrdered.Count() == 0)
+            {
+                Console.WriteLine("You didn't order any movies, have a great day!");
+            }
+            else
+            {
+                Console.WriteLine("Your movies are on the way! Here is what you should expect.");
+            }
             foreach (string movie in moviesOrdered)
             {
                 Console.WriteLine(movie);
